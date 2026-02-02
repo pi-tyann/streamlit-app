@@ -74,22 +74,25 @@ with st.sidebar:
     else:
         x_axis = '区分'
     
-# 指標を計算
-ave_item = df_filter[item].mean()
-max_item = df_filter[item].max()
-min_item = df_filter[item].min()
+if df_filter.empty:
+    st.warning("選択された条件ではデータがありません")
+else:
+    # 指標を計算
+    ave_item = df_filter[item].mean()
+    max_item = df_filter[item].max()
+    min_item = df_filter[item].min()
 
-# エクスパンダー
-with st.expander('データの詳細'):
-    show_data = st.checkbox('値をグラフに表示する')
-    show_metrics = st.checkbox('平均・最大・最小を表示する')
+    # エクスパンダー
+    with st.expander('データの詳細'):
+        show_data = st.checkbox('値をグラフに表示する')
+        show_metrics = st.checkbox('平均・最大・最小を表示する')
 
-    # 指標の表示
-    if show_metrics:
-        m1, m2, m3 = st.columns(3)
-        m1.metric(label='平均値', value=f"{ave_item:.1f}%")
-        m2.metric(label='最大値', value=f"{max_item:.1f}%")
-        m3.metric(label='最小値', value=f"{min_item:.1f}%")
+        # 指標の表示
+        if show_metrics:
+            m1, m2, m3 = st.columns(3)
+            m1.metric(label='平均値', value=f"{ave_item:.1f}%")
+            m2.metric(label='最大値', value=f"{max_item:.1f}%")
+            m3.metric(label='最小値', value=f"{min_item:.1f}%")
 
 # タブで表とグラフを切り替える
 tab1,tab2 = st.tabs(['表','グラフ'])
