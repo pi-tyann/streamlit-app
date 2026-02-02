@@ -38,9 +38,9 @@ with st.sidebar:
     df_type = st.radio('表示する内容を選択してください',
                        ['被害','セキュリティ対策'])
     if df_type == '被害':
-        df = df1
-        item_columns = df1.columns[4:]      # 4列目から移行が被害項目
-        item_name = '被害'
+        df = df1 if df_type=='被害' else df2
+        item_columns = df1.columns[4:]  if df_type=='被害' else df2    # 4列目から移行が被害項目
+        item_name = '被害' if df_type=='被害' else 'セキュリティ'
 
     else:
         df = df2
@@ -50,11 +50,13 @@ with st.sidebar:
     st.header('条件を選択してください')
 
     category = st.multiselect('分類を選択してください（複数選択可）',
-                              df['分類'].unique())
+                              df['分類'].unique(),
+                              default=df['分類'].unique())
     df_category = df[df['分類'].isin(category)]     # 複数選択時にcategoryがTrue（選択されているもの)だけを残す
 
     sub_category = st.multiselect('区分を選択してください（複数選択可）',
-                                  df_category['区分'].unique())        # .uniqueは配列の重複を除いた値の一覧を返す
+                                  df_category['区分'].unique(),
+                                  default=df_category['区分'].unique())        # .uniqueは配列の重複を除いた値の一覧を返す
     df_filter = df_category[df_category['区分'].isin(sub_category)]
 
     item = st.selectbox(f'{item_name}を選択してください',
