@@ -94,27 +94,27 @@ else:
             m2.metric(label='最大値', value=f"{max_item:.1f}%")
             m3.metric(label='最小値', value=f"{min_item:.1f}%")
 
-# タブで表とグラフを切り替える
-tab1,tab2 = st.tabs(['表','グラフ'])
+    # タブで表とグラフを切り替える
+    tab1,tab2 = st.tabs(['表','グラフ'])
 
-with tab1:
-    # 表の作成
-    st.header(f'{item_name}の表')
-    df = st.dataframe(df_filter[['分類','区分',item]],width=800,height=250)
-    
-with tab2:
-    # グラフの作成
-    st.header(f'{item_name}のグラフ')
-    fig = px.bar(
-        df_filter,
-        x=x_axis,
-        y=item,
-        color=color,
-        text=df_filter[item] if show_data else None,
-        barmode= 'group',
-        labels={x_axis:x_axis,item:item_name+'の件数',color:color},
-        title=f'{item_name}：{item}の棒グラフ'
-    )    
-    st.plotly_chart(fig)
+    with tab1:
+        # 表の作成
+        st.header(f'{item_name}の表')
+        df = st.dataframe(df_filter[['分類','区分',item]],width=800,height=250)
+        
+    with tab2:
+        # グラフの作成
+        st.header(f'{item_name}のグラフ')
+        fig = px.bar(
+            df_filter,
+            x=x_axis,
+            y=item,
+            color=color,
+            text=df_filter[item] if show_data else None,
+            barmode= 'group',
+            labels={x_axis:x_axis,item:item_name+'の件数',color:color},
+            title=f'{item_name}：{item}の棒グラフ'
+        )    
+        st.plotly_chart(fig)
 
 
