@@ -31,6 +31,8 @@ df2 = df2.rename(columns={
 # markdown: streamlitでMrakdown形式のテキストを表示
 #           #で見出しレベル1、unsafe_allow_html=TrueでHTMLタグを使えるように
 st.markdown('# 情報通信機器利用時の<br>被害とセキュリティ対策',unsafe_allow_html=True)
+st.markdown('### 目的： 情報通信機器の利用に関する被害とセキュリティ対策の傾向を調べる')
+st.markdown('### 使い方： サイドバーを開いて条件を選択する')
 
 with st.sidebar:
     df_type = st.radio('表示する内容を選択してください',
