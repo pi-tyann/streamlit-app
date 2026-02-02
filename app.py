@@ -38,9 +38,9 @@ with st.sidebar:
     df_type = st.radio('表示する内容を選択してください',
                        ['被害','セキュリティ対策'])
     if df_type == '被害':
-        df = df1 if df_type=='被害' else df2
-        item_columns = df1.columns[4:]  if df_type=='被害' else df2    # 4列目から移行が被害項目
-        item_name = '被害' if df_type=='被害' else 'セキュリティ'
+        df = df1 
+        item_columns = df1.columns[4:]    # 4列目から移行が被害項目
+        item_name = '被害'
 
     else:
         df = df2
